@@ -2,17 +2,6 @@ import re
 
 from src.masks import get_mask_account, get_mask_card_number
 
-date = "2024-03-11T02:26:18.671407"
-input_data = """Maestro 1596837868705199
-Счет 64686473678894779589
-MasterCard 7158300734726758
-Счет 35383033474447895560
-Visa Classic 6831982476737658
-Visa Platinum 8990922113665229
-Visa Gold 5999414228426353
-Счет 73654108430135874305"""
-
-
 def mask_account_card(data: str) -> str:
     """
     Функция маскирует данные карты и счета из строк
@@ -40,6 +29,3 @@ def get_date(date_str: str) -> str:
     year, month, day = date_part.split("-")
     return f"{day}.{month}.{year}"
 
-
-test = print(mask_account_card(input_data))
-test_date = print(get_date(date))
