@@ -10,7 +10,7 @@ test = [
 ]
 
 
-def filter_by_state(list_dist: List[Dict], state: str ="EXECUTED") -> List[Dict]:
+def filter_by_state(list_dist: List[Dict], state: str = "EXECUTED") -> List[Dict]:
     """
     Фильтрует список словарей по значению ключа state.
     :param list_dist: список словарей
