@@ -31,7 +31,6 @@ def sort_by_date(filter_by_state: List[Dict], decrease: bool = True) -> List[Dic
     :param filter_by_state: функция приводит формат даты
     :return: отсортированный список словарей
     """
-    sorted_list = []
     for dist in filter_by_state:
         dist["date"] = get_date(dist["date"])
     sorted_list = sorted(filter_by_state, key=lambda x: x["date"], reverse=decrease)
