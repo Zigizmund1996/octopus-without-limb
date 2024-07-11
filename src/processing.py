@@ -19,9 +19,9 @@ def filter_by_state(list_dist: List[Dict], state: str = "EXECUTED") -> List[Dict
     у которых ключ state соответствует указанному значению
     """
     filter_list = []
-    for dist in list_dist:
-        if dist.get("state") == state:
-            filter_list.append(dist)
+    for dict in list_dist:
+        if dict.get("state") == state:
+            filter_list.append(dict)
     return filter_list
 
 
@@ -31,8 +31,8 @@ def sort_by_date(filter_by_state: List[Dict], decrease: bool = True) -> List[Dic
     :param filter_by_state: функция приводит формат даты
     :return: отсортированный список словарей
     """
-    for dist in filter_by_state:
-        dist["date"] = get_date(dist["date"])
+    for dict in filter_by_state:
+        dict["date"] = get_date(dict["date"])
     sorted_list = sorted(filter_by_state, key=lambda x: x["date"], reverse=decrease)
     return sorted_list
 
