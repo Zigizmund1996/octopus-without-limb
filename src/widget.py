@@ -16,7 +16,7 @@ def mask_account_card(data: str) -> str:
         elif len(number) == 20:
             mask_number = get_mask_account(number)
         else:
-            mask_number = "Ошибка"
+            mask_number = "Error"
         data = re.sub(number, mask_number, data, count=1)
     return data
 
