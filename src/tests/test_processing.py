@@ -27,21 +27,16 @@ def test_filter_by_state(list_dist: List[Dict], expected: List[Dict]) -> None:
     assert test_filter == expected
 
 
-@pytest.mark.parametrize(
-    "list_dict, expected",
-    [
-        (
-            [
-                {"id": 41428829, "state": "EXECUTED", "date": "2019-07-03T18:35:29.512364"},
-                {"id": 939719570, "state": "EXECUTED", "date": "2018-06-30T02:08:58.425572"},
-            ],
-            [
-                {"id": 939719570, "state": "EXECUTED", "date": "30.06.2018"},
-                {"id": 41428829, "state": "EXECUTED", "date": "03.07.2019"},
-            ],
-        )
-    ],
-)
-def test_sort_by_date(list_dict: List[Dict], expected: List[Dict]) -> None:
-    test_sort = sort_by_date(list_dict)
-    assert test_sort == expected
+@pytest.fixture
+def fixture_state() -> List[Dict]:
+    return [
+        {"id": 41428829, "state": "EXECUTED", "date": "2019-07-03T18:35:29.512364"},
+        {"id": 939719570, "state": "EXECUTED", "date": "2018-06-30T02:08:58.425572"},
+    ]
+
+
+def test_sort_by_date(fixture_state: List[Dict]) -> None:
+    assert sort_by_date(fixture_state) == [
+        {"id": 939719570, "state": "EXECUTED", "date": "30.06.2018"},
+        {"id": 41428829, "state": "EXECUTED", "date": "03.07.2019"},
+    ]
