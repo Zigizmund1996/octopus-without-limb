@@ -2,7 +2,7 @@ from typing import Dict, List
 
 import pytest
 
-from src.generators import filter_by_currency, transaction_descriptions
+from src.generators import card_number_generator, filter_by_currency, transaction_descriptions
 
 
 @pytest.fixture
@@ -75,3 +75,27 @@ def test_transaction_descriptions(transactions: List[Dict]) -> None:
     ]
     for expected in expected_descriptions:
         assert next(descriptions) == expected
+
+
+@pytest.mark.parametrize(
+    "diapason, expected",
+    [
+        (
+            (1, 5),
+            [
+                "0000 0000 0000 0001",
+                "0000 0000 0000 0002",
+                "0000 0000 0000 0003",
+                "0000 0000 0000 0004",
+                "0000 0000 0000 0005",
+            ],
+        ),
+        ((1, 1), ["0000 0000 0000 0001"]),
+        ((-1, 0), ["Error: invalid card range, numbers should be non-negative or zero"]),
+        ((10000000000000000, 10000000000000001), ["Error: invalid card number, number too long"]),
+        ((2, 1), ["Error: start must be less than or equal to end"]),
+    ],
+)
+def test_card_number_generator(diapason: tuple[int, int], expected: List[str]) -> None:
+    number_generator = list(card_number_generator(*diapason))
+    assert number_generator == expected
