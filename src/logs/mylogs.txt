@@ -1,0 +1,6 @@
+2024-07-28 06:19:51.290505 - Started execution of my_function
+2024-07-28 06:19:51.290533 - Finished execution of my_function with result: 3
+2024-07-28 06:19:51.290633 - Started execution of my_function
+2024-07-28 06:19:51.290642 - Finished execution of my_function with result: 5
+2024-07-28 06:19:51.290720 - Started execution of get_mask_card_number
+2024-07-28 06:19:51.290728 - Finished execution of get_mask_card_number with result: None
