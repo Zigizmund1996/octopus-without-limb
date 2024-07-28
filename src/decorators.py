@@ -6,6 +6,16 @@ log_path = os.path.join("logs", "mylogs.txt")
 
 
 def log(filename=None):
+    """
+
+    Декоратор для логирования вызовов функции.
+
+    Параметры:
+    filename (str): Имя файла для записи логов. Если не указано, логи выводятся в консоль.
+
+    Возвращает:
+    function: Обёртка для логирования вызовов функции."""
+
     def decorator_log(func):
         @functools.wraps(func)
         def wrapper_log(*args, **kwargs):
