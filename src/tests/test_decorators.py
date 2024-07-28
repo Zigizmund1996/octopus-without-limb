@@ -1,17 +1,16 @@
 import pytest
 from src.decorators import log
-import os
-
-log_path = os.path.join("logs", "mylogs.txt")
-
-
-@log(filename="log_path")
-def my_function(x, y):
-    return x + y
 
 
 @log()
 def my_function_console(x, y):
+    return x + y
+
+
+@log()
+def my_function_error(x, y):
+    if x == "undefined_var":
+        raise ValueError("Invalid value for x")
     return x + y
 
 
@@ -39,3 +38,11 @@ def test_my_function_console(capsys):
     assert result == 5
     assert "Started execution of my_function_console" in captured.out
     assert "Finished execution of my_function_console with result: 5" in captured.out
+
+
+def test_my_function_error_handling(capsys):
+    with pytest.raises(ValueError, match="Invalid value for x"):
+        my_function_error("undefined_var", 2)
+    captured = capsys.readouterr()
+    assert "Started execution of my_function_error" in captured.out
+    assert "Error in my_function_error; Type: ValueError" in captured.out

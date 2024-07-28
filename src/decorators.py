@@ -1,10 +1,8 @@
 import datetime
-
-# from typing import Callable, Any, Optional
+import os
 import functools
 
-# from src.masks import get_mask_card_number
-import os
+log_path = os.path.join("logs", "mylogs.txt")
 
 
 def log(filename=None):
@@ -18,14 +16,14 @@ def log(filename=None):
             log_message += start_msg
 
             try:
-
-                result = func(*args, **kwargs)
+                result = func(*args, *kwargs)
 
                 # сообщение об успешном выполнении функции
                 end_msg = f"{datetime.datetime.now()} - Finished execution of {func.__name__} with result: {result}\n"
                 log_message += end_msg
 
                 if filename:
+                    os.makedirs(os.path.dirname(filename), exist_ok=True)
                     with open(filename, "a") as log_file:
                         log_file.write(log_message)
                 else:
@@ -41,20 +39,18 @@ def log(filename=None):
                 log_message += error_msg
 
                 if filename:
+                    os.makedirs(os.path.dirname(filename), exist_ok=True)
                     with open(filename, "a") as log_file:
                         log_file.write(log_message)
                 else:
                     print(log_message)
 
-                # ЕСЛИ ЕСТЬ ЕЩЕ ОШИБКА
+                # пишем дальше
                 raise
 
         return wrapper_log
 
     return decorator_log
-
-
-log_path = os.path.join("logs", "mylogs.txt")
 
 
 @log(filename=log_path)
@@ -70,9 +66,15 @@ def my_function_console(x, y):
     return x + y
 
 
-my_function(3, 2)
+my_function_console(3, 2)
 
-# @log(filename=log_path)
-# def get_mask_card_number(card_number: str) -> str:
-#   return
-# get_mask_card_number('7000792289606361')
+
+@log()
+def my_function_error(x, y):
+    return x + y
+
+
+try:
+    my_function_error("undefined_var", 2)
+except Exception as e:
+    print(f"Caught an exception: {e}")
