@@ -2,6 +2,7 @@ from typing import Dict, List
 
 from src.widget import get_date
 
+
 def filter_by_state(list_dist: List[Dict], state: str = "EXECUTED") -> List[Dict]:
     """
     Фильтрует список словарей по значению ключа state.
@@ -27,5 +28,3 @@ def sort_by_date(filter_by_state: List[Dict], decrease: bool = True) -> List[Dic
         dict["date"] = get_date(dict["date"])
     sorted_list = sorted(filter_by_state, key=lambda x: x["date"], reverse=decrease)
     return sorted_list
-
-

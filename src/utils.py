@@ -1,10 +1,10 @@
 import json
 import os
-from typing import List
+from typing import Dict, List
 
 
 # file_path = os.path.join('data', 'operations.json')
-def load_transactions(file_path: str) -> List:
+def load_transactions(file_path: str) -> List[Dict]:
     """
     Функция для загрузки данных о финансовых транзакциях из JSON-файла.
     :param file_path: Путь до JSON-файла.
@@ -23,6 +23,6 @@ def load_transactions(file_path: str) -> List:
         return []
 
 
-file_path = os.path.join(os.path.dirname(os.path.dirname(__file__)),"data", "operations.json")
+file_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "operations.json")
 transaction = load_transactions(file_path)
 print(transaction)
