@@ -1,25 +1,27 @@
 import json
+import logging
 import os
 from typing import Dict, List
+
 from src.external_api import get_exchange_rate
-import logging
 
 project_root = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
-log_directory = os.path.join(project_root, 'logs')
+log_directory = os.path.join(project_root, "logs")
 if not os.path.exists(log_directory):
     os.makedirs(log_directory)
 
-logger = logging.getLogger('utils')
+logger = logging.getLogger("utils")
 logger.setLevel(logging.DEBUG)
-log_file = os.path.join(log_directory, 'utils.log')
+log_file = os.path.join(log_directory, "utils.log")
 
-file_handler = logging.FileHandler(log_file, mode='w')
+file_handler = logging.FileHandler(log_file, mode="w")
 file_handler.setLevel(logging.DEBUG)
 
-file_formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+file_formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 file_handler.setFormatter(file_formatter)
 
 logger.addHandler(file_handler)
+
 
 def load_transactions(file_path: str) -> List[Dict]:
     """
