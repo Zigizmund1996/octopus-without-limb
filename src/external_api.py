@@ -19,7 +19,12 @@ def get_exchange_rate(from_currency: str, to_currency: str) -> float:
     """
     headers = {"apikey": API_KEY}
     params = {"base": from_currency, "symbols": to_currency}
-    response = requests.get(URL, headers=headers, params=params)
-    data: Dict[str, Any] = response.json()
-    round_data = round(data["rates"][to_currency], 2)
-    return float(round_data)
+    try:
+        response = requests.get(URL, headers=headers, params=params)
+        response.raise_for_status()
+        data: Dict[str, Any] = response.json()
+        round_data = round(data["rates"][to_currency], 2)
+        return float(round_data)
+    except requests.HTTPError as http_err:
+        error_message = f"HTTP ошибка - {http_err.response.status_code} - {http_err.response.reason}"
+        raise ValueError(error_message)
