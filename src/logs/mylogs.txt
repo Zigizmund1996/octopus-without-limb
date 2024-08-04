@@ -1,3 +1,0 @@
-
-2024-07-30 21:50:07.995493 - Started execution of my_function
-2024-07-30 21:50:07.995518 - Finished execution of my_function with result: 3
