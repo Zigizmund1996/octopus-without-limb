@@ -1,6 +1,6 @@
 import datetime
-import os
 import functools
+import os
 
 log_path = os.path.join("logs", "mylogs.txt")
 
